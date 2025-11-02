@@ -21,39 +21,53 @@ exports.getDashboardData = async (req, res) => {
             { $group: { _id: null, total: { $sum: "$amount" } } },
         ]);
 
-        //Get income transactions in the last 60 days
+        // Get income transactions in the last 60 days
+        const sixtyDaysAgo = new Date();
+        sixtyDaysAgo.setDate(sixtyDaysAgo.getDate() - 60);
         const last60DaysIncomeTransactions = await Income.find({
-            userId,
-            date: { $gte: new Date(Date.now() - 60*24*60*60*1000) },
-        }).sort({ date: -1 });
+            userId: userObjectId,
+            createdAt: { $gte: sixtyDaysAgo }
+        }).sort({ createdAt: -1 }).lean();
 
-        //Get total income for last 60 days
+        // Get total income for last 60 days
         const incomeLast60Days = last60DaysIncomeTransactions.reduce(
             (sum, transaction) => sum + transaction.amount,
             0
         );
 
-        //Get expense transactions in the last 30 days
+        // Get expense transactions in the last 30 days
+        const thirtyDaysAgo = new Date();
+        thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
         const last30DaysExpenseTransactions = await Expense.find({
-            userId,
-            date: { $gte: new Date(Date.now() - 30*24*60*60*1000)},
-        }).sort({ date: -1 });
+            userId: userObjectId,
+            createdAt: { $gte: thirtyDaysAgo }
+        }).sort({ createdAt: -1 }).lean();
 
-        //Get total expense for last 30 days
+        // Get total expense for last 30 days
         const expenseLast30Days = last30DaysExpenseTransactions.reduce(
             (sum, transaction) => sum + transaction.amount,
             0
         );
 
-        //Fetch last 5 transactions (income + expense)
+        // Fetch last 5 transactions (income + expense)
+        const lastIncomeTransactions = await Income.find({ 
+            userId: userObjectId
+        }).sort({ createdAt: -1 }).limit(5).lean();
+
+        const lastExpenseTransactions = await Expense.find({ 
+            userId: userObjectId
+        }).sort({ createdAt: -1 }).limit(5).lean();
+
         const lastTransactions = [
-            ...(await Income.find({ userId}).sort({ date: -1}).limit(5)).map(
-                (txn) => ({
-                    ...txn.toObject(),
-                    type: "expense",
-                })
-            ),
-        ].sort((a, b) => b.date - a.date); //Sort latest first
+            ...lastIncomeTransactions.map(txn => ({
+                ...txn,
+                type: "income"
+            })),
+            ...lastExpenseTransactions.map(txn => ({
+                ...txn,
+                type: "expense"
+            }))
+        ].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 5); // Sort by createdAt and take top 5
 
         //Final Response
         res.json({
