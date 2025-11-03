@@ -77,7 +77,7 @@ exports.downloadIncomeExcel = async (req, res) => {
     const data = income.map((item) => ({
       Source: item.source,
       Amount: item.amount,
-      Date: item.date.toISOString().split("T")[0], 
+      Date: item.date ? item.date.toISOString().split("T")[0] : "",
     }));
 
     const wb = xlsx.utils.book_new();
@@ -85,7 +85,11 @@ exports.downloadIncomeExcel = async (req, res) => {
     xlsx.utils.book_append_sheet(wb, ws, "Income");
 
     const fileName = `income_details_${Date.now()}.xlsx`;
-    const filePath = path.join(__dirname, "../downloads", fileName);
+    const downloadsDir = path.join(__dirname, "../downloads");
+    if (!fs.existsSync(downloadsDir)) {
+      fs.mkdirSync(downloadsDir, { recursive: true });
+    }
+    const filePath = path.join(downloadsDir, fileName);
 
     xlsx.writeFile(wb, filePath);
 

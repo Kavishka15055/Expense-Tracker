@@ -7,6 +7,7 @@ const IncomeSchema = new mongoose.Schema({
     source: {type: String, required: true}, //Example: salary, freelance, etc
     amount: {type: Number, required: true},
     description: {type: String, default: ""},
+    date: {type: Date, required: true},
 }, { timestamps: true });
 
 module.exports = mongoose.model("Income", IncomeSchema);
