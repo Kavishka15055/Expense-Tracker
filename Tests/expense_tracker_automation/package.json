@@ -1,0 +1,21 @@
+{
+  "name": "expense_tracker_automation",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module", 
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+  "test": "mocha tests/**/*.js --reporter mochawesome"
+},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "mocha": "^11.7.4",
+    "mochawesome": "^7.1.4",
+    "selenium-webdriver": "^4.38.0"
+  }
+}
