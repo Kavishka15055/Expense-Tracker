@@ -5,6 +5,7 @@ import LoginPage from "../pages/loginPage.js";
 import ExpensePage from "../pages/expensePage.js";
 import RegisterPage from "../pages/registerPage.js";
 import IncomePage from "../pages/incomePage.js";
+// import DeleteIncomePage from "../pages/incomeDelete.js";
 import { describe, it, before, after } from "mocha";
 
 let driver;
@@ -31,24 +32,24 @@ describe("Expense Tracker Login Test", function () {
     await driver.quit();
   });
 
-//     it("should sign in successfully", async function () {
-//     console.log("🧪 Running sign in test");
+    it("should sign in successfully", async function () {
+    console.log("🧪 Running sign in test");
 
-//     const registerPage = new RegisterPage(driver); 
+    const registerPage = new RegisterPage(driver); 
 
-//     const email = "test@example.com";
-//     const password = "test@123";
-//     const fullName= "test"
+    const email = "test@example.com";
+    const password = "test@123";
+    const fullName= "test"
     
 
-//     await registerPage.signup(email, password,fullName);
+    await registerPage.signup(email, password,fullName);
 
-//     console.log("✅ Sign up test completed successfully!");
-//   });
+    console.log("✅ Sign up test completed successfully!");
+  });
 
-//   afterEach(async function () {
-//   await driver.sleep(2000);
-// });
+  afterEach(async function () {
+  await driver.sleep(2000);
+});
 
   it("should log in successfully", async function () {
     console.log("🧪 Running login test");
@@ -79,12 +80,16 @@ it("should add income successfully", async function () {
   const date = "11/03/2025";
   await incomePage.addIncome(Source, amount, date);
   
-  console.log("✅ Expenses add test completed successfully!");
+  console.log("✅ income add test completed successfully!");
 });
 
     afterEach(async function () {
   await driver.sleep(2000);
     });
+    
+
+
+
 
 it("should add expenses successfully", async function () {
   console.log("🧪 Running add expense test");
