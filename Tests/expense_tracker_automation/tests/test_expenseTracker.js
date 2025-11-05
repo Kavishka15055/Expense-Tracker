@@ -48,7 +48,7 @@ describe("Expense Tracker Login Test", function () {
   });
 
   afterEach(async function () {
-  await driver.sleep(2000);
+  await driver.sleep(1000);
 });
 
   it("should log in successfully", async function () {
@@ -67,7 +67,7 @@ describe("Expense Tracker Login Test", function () {
 
 
     afterEach(async function () {
-  await driver.sleep(2000);
+  await driver.sleep(1000);
     });
 
 it("should add income successfully", async function () {
@@ -84,13 +84,9 @@ it("should add income successfully", async function () {
 });
 
     afterEach(async function () {
-  await driver.sleep(2000);
+  await driver.sleep(1000);
     });
     
-
-
-
-
 it("should add expenses successfully", async function () {
   console.log("🧪 Running add expense test");
 
@@ -107,7 +103,7 @@ it("should add expenses successfully", async function () {
 });
 
     afterEach(async function () {
-  await driver.sleep(2000);
+  await driver.sleep(1000);
     });
 
 
