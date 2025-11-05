@@ -72,5 +72,39 @@ export default class ExpensePage {
     );
     await this.driver.wait(until.elementIsEnabled(submitBtn), 5000);
     await submitBtn.click();
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    //Download expense report
+        const downloadBtn = await this.driver.wait(
+      until.elementLocated(By.xpath('//*[@id="root"]/div[1]/div/div[2]/div[2]/div/div/div[2]/div[1]/button')),
+      10000
+    );
+    await this.driver.wait(until.elementIsEnabled(downloadBtn), 5000);
+    await downloadBtn.click();
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+
+    //delete expense 
+const deleteBtn = await this.driver.wait(
+      until.elementLocated(By.css(".group:nth-child(1) .text-gray-400 > svg")),
+      10000
+    );
+    await this.driver.wait(until.elementIsEnabled(deleteBtn), 5000);
+    await deleteBtn.click();
+    await new Promise(resolve => setTimeout(resolve, 1000));
+   
+    try {
+      const confirmButton = await this.driver.wait(
+        until.elementLocated(By.xpath('//*[@id="root"]/div[1]/div/div[2]/div[2]/div/div[2]/div/div/div[2]/div/div/button')),
+        5000
+      );
+      await confirmButton.click();
+    } catch (err) {
+      console.log("⚠️ No confirmation button appeared, continuing...");
+    }
+    
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    
   }
 }
