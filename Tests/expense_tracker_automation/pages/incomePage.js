@@ -41,6 +41,8 @@ export default class IncomePage {
     await iconSelector.click();
     await new Promise(resolve => setTimeout(resolve, 1000));
 
+   //Add Source
+
     const sourceField = await this.driver.wait(
       until.elementLocated(By.xpath('//*[@id="root"]/div[1]/div/div[2]/div[2]/div/div[2]/div/div/div[2]/div/div[2]/div/input')),
       10000
@@ -48,6 +50,8 @@ export default class IncomePage {
     await this.driver.wait(until.elementIsVisible(sourceField), 5000);
     await sourceField.sendKeys(Source);
     await new Promise(resolve => setTimeout(resolve, 1000));
+
+  //Add amoun
 
     const amountField = await this.driver.wait(
       until.elementLocated(By.xpath('//*[@id="root"]/div[1]/div/div[2]/div[2]/div/div[2]/div/div/div[2]/div/div[3]/div/input')),
@@ -57,6 +61,7 @@ export default class IncomePage {
     await amountField.sendKeys(amount);
     await new Promise(resolve => setTimeout(resolve, 1000));
 
+//Add date    
     const dateField = await this.driver.wait(
       until.elementLocated(By.xpath('//*[@id="root"]/div[1]/div/div[2]/div[2]/div/div[2]/div/div/div[2]/div/div[4]/div/input')),
       10000
@@ -65,6 +70,8 @@ export default class IncomePage {
     await dateField.sendKeys(date);
     await new Promise(resolve => setTimeout(resolve, 1000));
 
+//Click Submit button
+
     const submitBtn = await this.driver.wait(
       until.elementLocated(By.xpath('//*[@id="root"]/div[1]/div/div[2]/div[2]/div/div[2]/div/div/div[2]/div/div[5]/button')),
       10000
@@ -72,6 +79,8 @@ export default class IncomePage {
     await this.driver.wait(until.elementIsEnabled(submitBtn), 5000);
     await submitBtn.click();
     await new Promise(resolve => setTimeout(resolve, 1000));
+
+    //check hte  income point
 
     const bars = await this.driver.wait(
       until.elementsLocated(By.css('path.recharts-rectangle')),
@@ -88,7 +97,16 @@ export default class IncomePage {
     await lastBar.click();
     await new Promise(resolve => setTimeout(resolve, 1000));
 
+    //Download income report
+    const downloadBtn = await this.driver.wait(
+    until.elementLocated(By.xpath('//*[@id="root"]/div[1]/div/div[2]/div[2]/div/div/div/div[2]/div[1]/button')),
+    10000
+    );
+    await this.driver.wait(until.elementIsEnabled(downloadBtn), 5000);
+    await downloadBtn.click();
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
+//income delete Test
 
     const deleteBtn = await this.driver.wait(
       until.elementLocated(By.css(".group:nth-child(1) .text-gray-400 > svg")),
@@ -97,7 +115,7 @@ export default class IncomePage {
     await this.driver.wait(until.elementIsEnabled(deleteBtn), 5000);
     await deleteBtn.click();
     await new Promise(resolve => setTimeout(resolve, 1000));
-    // Confirm delete if a confirmation button appears
+    
     try {
       const confirmButton = await this.driver.wait(
         until.elementLocated(By.xpath('//*[@id="root"]/div[1]/div/div[2]/div[2]/div/div[2]/div/div/div[2]/div/div/button')),
