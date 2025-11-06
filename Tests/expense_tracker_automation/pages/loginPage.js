@@ -6,6 +6,7 @@ export default class LoginPage {
   }
 
   async login(email, password) {
+
     // Wait for email field
     const emailField = await this.driver.wait(
       until.elementLocated(By.xpath('//*[@id="root"]/div[1]/div/div[1]/div/form/div[1]/div/input')),

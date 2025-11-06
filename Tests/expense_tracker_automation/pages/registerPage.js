@@ -6,47 +6,54 @@ export default class RegisterPage {
   }
 
   async signup(fullName, email, password) {
-
-
-    // Fill in fields
-    const fullNameField = await this.driver.findElement(
-      By.xpath('//*[@id="root"]/div[1]/div/div[1]/div/form/div[2]/div[1]/div[1]/div/input')
+    // Fill in full name
+    const fullNameField = await this.driver.wait(
+      until.elementLocated(By.xpath('//*[@id="root"]/div[1]/div/div[1]/div/form/div[2]/div[1]/div[1]/div/input')),
+      5000
     );
     await fullNameField.sendKeys(fullName);
 
-    const emailField = await this.driver.findElement(
-      By.xpath('//*[@id="root"]/div[1]/div/div[1]/div/form/div[2]/div[1]/div[2]/div/input')
+    // Email field
+    const emailField = await this.driver.wait(
+      until.elementLocated(By.xpath('//*[@id="root"]/div[1]/div/div[1]/div/form/div[2]/div[1]/div[2]/div/input')),
+      5000
     );
     await emailField.sendKeys(email);
 
-    const passwordField = await this.driver.findElement(
-      By.xpath('//*[@id="root"]/div[1]/div/div[1]/div/form/div[2]/div[2]/div/div/input')
+    // Password field
+    const passwordField = await this.driver.wait(
+      until.elementLocated(By.xpath('//*[@id="root"]/div[1]/div/div[1]/div/form/div[2]/div[2]/div/div/input')),
+      5000
     );
     await passwordField.sendKeys(password);
 
-    const submitButton = await this.driver.findElement(
-      By.xpath('//*[@id="root"]/div[1]/div/div[1]/div/form/button')
+    // Submit button
+    const submitButton = await this.driver.wait(
+      until.elementLocated(By.xpath('//*[@id="root"]/div[1]/div/div[1]/div/form/button')),
+      5000
     );
     await submitButton.click();
 
-    // Wait for either success or "user already exists" message
+    // Wait for either error message or success
     try {
-      // Adjust this XPath to match your app's error message
+      // Check for "user already exists"
       const errorMsg = await this.driver.wait(
         until.elementLocated(By.xpath('//*[@id="root"]/div[1]/div/div[1]/div/form/p[1]')),
         5000
       );
-        
 
       if (errorMsg) {
         console.log("⚠️ User already exists. Redirecting to login page...");
-        // Click login link/button if exists
-        const loginLink = await this.driver.findElement(By.xpath('//*[@id="root"]/div[1]/div/div[1]/div/form/p[2]/a'));
+        const loginLink = await this.driver.findElement(By.xpath('//*[@id="root"]/div[1]/div/div[1]/div/form/p/a'));
         await loginLink.click();
+        return; // stop further execution
       }
     } catch (err) {
-      // No error message appeared → user registered successfully
-      console.log("✅ User registered successfully!");
+      // No error → signup successful
+      console.log("✅ User registered successfully! Redirecting to login page...");
+
+      // Navigate directly to login page (instead of clicking a non-existent link)
+      await this.driver.get("http://localhost:5173/login"); // <-- replace with your login URL
     }
   }
 }

@@ -33,16 +33,15 @@ describe("Expense Tracker Login Test", function () {
   });
 
     it("should sign in successfully", async function () {
-    console.log("🧪 Running sign in test");
+    console.log("🧪 Running sign up test");
 
     const registerPage = new RegisterPage(driver); 
 
+    const fullName= "test"
     const email = "test@example.com";
     const password = "test@123";
-    const fullName= "test"
-    
 
-    await registerPage.signup(email, password,fullName);
+    await registerPage.signup(fullName,email,password);
 
     console.log("✅ Sign up test completed successfully!");
   });
