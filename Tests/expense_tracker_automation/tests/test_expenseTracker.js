@@ -5,7 +5,7 @@ import LoginPage from "../pages/loginPage.js";
 import ExpensePage from "../pages/expensePage.js";
 import RegisterPage from "../pages/registerPage.js";
 import IncomePage from "../pages/incomePage.js";
-// import DeleteIncomePage from "../pages/incomeDelete.js";
+import DashboardPage from "../pages/dashboardPage.js";
 import { describe, it, before, after } from "mocha";
 
 let driver;
@@ -100,6 +100,19 @@ it("should add expenses successfully", async function () {
   await expensePage.addExpense(category, amount, date);
 
   console.log("✅ Expenses add test completed successfully!");
+});
+
+    afterEach(async function () {
+  await driver.sleep(1000);
+    });
+
+it("should dashboard work successfully", async function () {
+  console.log("🧪 Running dashboard test");
+
+  const dashboardPage = new DashboardPage(driver);
+  await dashboardPage.testDashboardPage();
+
+  console.log("✅ Dashboard test completed successfully!");
 });
 
     afterEach(async function () {
