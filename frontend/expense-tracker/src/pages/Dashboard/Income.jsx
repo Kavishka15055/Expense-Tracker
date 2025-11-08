@@ -128,9 +128,9 @@ const Income = () => {
 
   return (
     <DashboardLayout activeMenu="Income">
-      <div className="my-5 mx-auto">
+      <div className="my-5 mx-auto ">
         <div className="grid grid-cols-1 gap-6">
-          <div className="">
+          <div className=" ">
             <IncomeOverview
               transactions={incomeData}
               onAddIncome={() => setOpenAddIncomeModal(true)}

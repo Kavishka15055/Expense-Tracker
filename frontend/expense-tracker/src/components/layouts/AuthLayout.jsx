@@ -1,30 +1,40 @@
-import React from 'react';
-import CARD_2 from '../../assets/images/card2.jpg';
-import { LuTrendingUpDown } from 'react-icons/lu';
+import React from "react";
+import CARD_2 from "../../assets/images/card2.png";
+import { LuTrendingUpDown } from "react-icons/lu";
+import Logo from "../../assets/images/logo.jpg";
 
 const AuthLayout = ({ children }) => {
   return (
     <div className="flex">
       {/* Left section (Auth Form Area) */}
-      <div className="w-screen h-screen md:w-[60vw] px-12 pt-8 pb-12">
-        <h2 className="text-lg font-medium text-black">Expense Tracker</h2>
+      <div className="w-screen h-screen md:w-[60vw] px-12 pt-8 pb-12 ">
+        <div className="flex items-center space-x-2">
+          <img
+          src={Logo}
+          alt="FinTrack Logo"
+          className="w-15 h-15 object-contain"
+        />
+        <h2 className="text-4xl font-medium text-black">FinTrack</h2>
+        </div>
+        
         {children}
       </div>
 
       {/* Right section (Decorative + Stats) */}
-      <div className="hidden md:block w-[40vw] h-screen bg-violet-50 bg-cover bg-no-repeat bg-center overflow-hidden p-8 relative">
+      <div className="hidden md:block w-[40vw] h-screen bg-cyan-50 bg-cover bg-no-repeat bg-center overflow-hidden p-8 relative">
         {/* Decorative shapes */}
-        <div className="w-48 h-48 rounded-[40px] bg-purple-600 absolute -top-7 -left-5" />
-        <div className="w-48 h-56 rounded-[40px] border-[20px] border-fuchsia-600 absolute top-[30%] -right-10" />
-        <div className="w-48 h-48 rounded-[40px] bg-violet-500 absolute -bottom-7 -left-5" />
+        <div className="w-48 h-48 rounded-[40px] bg-sky-500 absolute -top-7 -left-5" />
+        <div className="w-48 h-56 rounded-[40px] border-[20px] border-blue-900 absolute top-[30%] -right-10" />
+        <div className="w-30 h-30 rounded-[70px] border-[15px] border-emerald-400 absolute top-[22%] right-[13%]" />
+        <div className="w-48 h-48 rounded-[40px] bg-emerald-400 absolute -bottom-7 -left-5" />
 
         {/* Stats card */}
         <div className="grid grid-cols-1 z-20 relative">
           <StatsInfoCard
             icon={<LuTrendingUpDown />}
             label="Track Your Income & Expenses"
-            value="430,000"
-            color="bg-purple-600"
+            value="570,000"
+            color="bg-blue-900"
           />
         </div>
 

@@ -5,8 +5,6 @@ import axiosInstance from '../../utils/axioslnstance';
 import { useNavigate } from 'react-router-dom';
 import { API_PATHS } from '../../utils/apiPaths';
 import InfoCard from '../../components/Cards/InfoCard';
-import { IoMdCard } from 'react-icons/io';
-import {LuHandCoins, LuWalletMinimal } from 'react-icons/lu';
 import { addThousandsSeparator } from '../../utils/helper';
 import RecentTransactions from '../../components/Dashboard/RecentTransactions';
 import FinanceOverview from '../../components/Dashboard/FinanceOverview';
@@ -14,6 +12,9 @@ import ExpenseTransactions from '../../components/Dashboard/ExpenseTransactions'
 import Last30DaysExpenses from '../../components/Dashboard/Last30DaysExpenses';
 import RecentIncomeWithChart from '../../components/Dashboard/RecentIncomeWithChart';
 import RecentIncome from '../../components/Dashboard/RecentIncome';
+import { MdAccountBalanceWallet } from "react-icons/md";
+import { GiReceiveMoney } from "react-icons/gi";
+import { GiPayMoney } from "react-icons/gi";
 
 const Home = () => {
   useUserAuth();
@@ -49,22 +50,22 @@ const Home = () => {
 
   return (
     <DashboardLayout activeMenu="Dashboard">
-      <div className='my-5 mx-auto'>
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
+      <div className='my-5 mx-auto '>
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-6 '>
           <InfoCard
-            icon={<IoMdCard />}
+            icon={<MdAccountBalanceWallet />}
             label="Total Balance"
             value={addThousandsSeparator(dashboardData?.totalBalance || 0)}
             color="bg-primary"
           />
           <InfoCard
-            icon={<LuWalletMinimal />}
+            icon={<GiReceiveMoney />}
             label="Total Income"
             value={addThousandsSeparator(dashboardData?.totalIncome || 0)}
             color="bg-orange-500"
           />
           <InfoCard
-            icon={<LuHandCoins />}
+            icon={<GiPayMoney />}
             label="Total Expense"
             value={addThousandsSeparator(dashboardData?.totalExpense || 0)}
             color="bg-red-500"

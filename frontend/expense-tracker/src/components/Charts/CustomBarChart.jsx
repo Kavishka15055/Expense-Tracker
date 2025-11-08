@@ -12,7 +12,7 @@ import {
 
 const CustomBarChart = ({ data }) => {
   // Function to alternate bar colors
-  const getBarColor = (index) => (index % 2 === 0 ? "#875cf5" : "#cfbefb");
+  const getBarColor = (index) => (index % 2 === 0 ? "#0ea5e9" : "#bae6fd");
 
   // ✅ Fix: Tooltip must receive `content={<CustomTooltip />}`, not `content={CustomTooltip}`
   const CustomTooltip = ({ active, payload }) => {
@@ -20,7 +20,7 @@ const CustomBarChart = ({ data }) => {
       const item = payload[0].payload;
       return (
         <div className="bg-white shadow-md rounded-lg p-2 border border-gray-300">
-          <p className="text-xs font-semibold text-purple-800 mb-1">
+          <p className="text-xs font-semibold text-teal-400 mb-1">
             {item.category || item.month}
           </p>
           <p className="text-sm text-gray-600">

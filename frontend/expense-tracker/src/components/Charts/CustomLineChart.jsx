@@ -15,7 +15,7 @@ const CustomLineChart = ({data}) => {
     //   const item = payload[0].payload;
       return (
         <div className="bg-white shadow-md rounded-lg p-2 border border-gray-300">
-          <p className="text-xs font-semibold text-purple-800 mb-1">
+          <p className="text-xs font-semibold text-teal-400 mb-1">
             {payload[0].payload.category}
           </p>
           <p className="text-sm text-gray-600">
@@ -36,15 +36,15 @@ const CustomLineChart = ({data}) => {
             <AreaChart data={data}>
                 <defs>
                     <linearGradient id='incomeGradient' x1="0" y1='0' x2="0" y2='1'>
-                        <stop offset="5%" stopColor='#875cf5' stopOpacity={0.4} />
-                        <stop offset="95%" stopColor='#875cf5' stopOpacity={0} />
+                        <stop offset="5%" stopColor='#ef4444' stopOpacity={0.4} />
+                        <stop offset="95%" stopColor='#ef4444' stopOpacity={0} />
                     </linearGradient>
                 </defs>
                 <CartesianGrid stroke='none' />
                 <XAxis dataKey="month" tick={{ fontSize: 12, fill: "#555"}} stroke='none' />
                 <YAxis tick={{fontSize: 12, fill: "#555"}} stroke='none' />
                 <Tooltip content={<CustomTooltip />} />
-                <Area type="monotone" dataKey="amount" stroke='#875cf5' fill='url(#incomeGradient)' strokeWidth={3} dot={{ r: 3, fill: "#ab8df8"}} />
+                <Area type="monotone" dataKey="amount" stroke='#dc2626' fill='url(#incomeGradient)' strokeWidth={3} dot={{ r: 3, fill: "#ab8df8"}} />
             </AreaChart>
         </ResponsiveContainer>
     </div>
